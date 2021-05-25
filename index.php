@@ -11,17 +11,15 @@ error_reporting(E_ALL);
 session_start();
 //veel beter array met post inputs, dan forEach lopen (input array)
 
-if(isset($_POST['email'])){
+if (isset($_POST['email'])) {
 
-$email = $_POST['email'];
-$street = $_POST['street'];
-$streetNumber = $_POST['streetnumber'];
-$city = $_POST['city'];
-$zipcode = $_POST['zipcode'];
-
-}
-else {
-    $email = $street = $streetNumber = $city = $zipcode ="";
+    $email = $_POST['email'];
+    $street = $_POST['street'];
+    $streetNumber = $_POST['streetnumber'];
+    $city = $_POST['city'];
+    $zipcode = $_POST['zipcode'];
+} else {
+    $email = $street = $streetNumber = $city = $zipcode = "";
 }
 
 //isset checken zodat op page load geen errors 
@@ -29,7 +27,6 @@ else {
 if (empty($email)) {
     $email_error = "Can't submit empty email.";
     unset($_SESSION["email"]);
-    
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $email_filterError = "Invalid email format";
     unset($_SESSION["email"]);
@@ -39,14 +36,12 @@ if (empty($email)) {
 
 if (empty($street)) {
     $street_error = "Can't submit empty adress.";
-    
 } else {
     $_SESSION["street"] = $street;
 }
 
 if (empty($streetNumber)) {
     $streetNumber_error = "Can't submit empty adress.";
-    
 } elseif (!is_numeric($streetNumber)) {
     $streetnumeric_error = 'Data entered was not numeric';
     unset($_SESSION["streetnumber"]);
@@ -56,14 +51,12 @@ if (empty($streetNumber)) {
 
 if (empty($city)) {
     $city_error = "Can't submit empty city.";
-    
 } else {
     $_SESSION["city"] = $city;
 }
 
 if (empty($zipcode)) {
     $zipcode_error = "Can't submit empty zipcode.";
-   
 } elseif (!is_numeric($zipcode)) {
     $zipcodenum_error = "Data is not numeric";
     unset($_SESSION["zipcode"]);
@@ -71,10 +64,13 @@ if (empty($zipcode)) {
     $_SESSION["zipcode"] = $zipcode;
 }
 
-function overView() {
-    foreach($_POST as $key => $value) {
-    echo  $key ." is ". $value ."<br>";
-}
+
+
+function overView()
+{
+    foreach ($_POST as $key => $value) {
+        echo  $key . " is " . $value . "<br>";
+    }
 }
 
 
@@ -104,9 +100,9 @@ $products = [
     ['name' => 'Club Salmon', 'price' => 5]
 ];
 
+$totalPriceFood = array_sum($products);
 
-
-if($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=1') {
+if ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=1') {
     $products = [
         ['name' => 'Club Ham', 'price' => 3.20],
         ['name' => 'Club Cheese', 'price' => 3],
@@ -114,8 +110,7 @@ if($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=1') {
         ['name' => 'Club Chicken', 'price' => 4],
         ['name' => 'Club Salmon', 'price' => 5]
     ];
-}
-elseif($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=0') {
+} elseif ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=0') {
     $products = [
         ['name' => 'Cola', 'price' => 2],
         ['name' => 'Fanta', 'price' => 2],
@@ -126,5 +121,14 @@ elseif($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=0') {
 
 
 $totalValue = 0;
+
+if(isset($_POST['express_delivery'])) {
+    $totalValue += 5;
+    $deliveryTime = "45 minutes until delivery.";
+}
+
+else {
+    $deliveryTime = "2 hours until delivery.";
+}
 
 require 'form-view.php';

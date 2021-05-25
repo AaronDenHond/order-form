@@ -26,9 +26,10 @@
             </ul>
         </nav>
         <div class="postdata">
-        <?php echo overView() ?>
-        
-        
+            <?php echo overView(); ?>
+            <?php echo $deliveryTime; ?>
+
+
         </div>
         <form method="post">
             <div class="form-row">

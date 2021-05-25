@@ -18,6 +18,7 @@ $street = $_POST['street'];
 $streetNumber = $_POST['streetnumber'];
 $city = $_POST['city'];
 $zipcode = $_POST['zipcode'];
+
 }
 else {
     $email = $street = $streetNumber = $city = $zipcode ="";
@@ -37,7 +38,7 @@ if (empty($email)) {
 }
 
 if (empty($street)) {
-    $street_error = "Can't submit empty email.";
+    $street_error = "Can't submit empty adress.";
     
 } else {
     $_SESSION["street"] = $street;
@@ -69,6 +70,13 @@ if (empty($zipcode)) {
 } else {
     $_SESSION["zipcode"] = $zipcode;
 }
+
+function overView() {
+    foreach($_POST as $key => $value) {
+    echo  $key ." is ". $value ."<br>";
+}
+}
+
 
 
 function whatIsHappening()

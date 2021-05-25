@@ -10,59 +10,61 @@ error_reporting(E_ALL);
 //we are going to use session variables so we need to enable sessions
 session_start();
 //veel beter array met post inputs, dan forEach lopen (input array)
+
 $email = $_POST['email'];
 $street = $_POST['street'];
 $streetNumber = $_POST['streetnumber'];
 $city = $_POST['city'];
 $zipcode = $_POST['zipcode'];
 
-if(empty($email)) {
-    $email_error = "Please insert a valid email-adress";
-}
-elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
- $email_filterError = "Invalid email format";
-}
-else {
-    $_SESSION["email"] = $email;      
-}
-if(empty($street)) {
-    $street_error = "Please insert a valid street adress";
+
+if (empty($email)) {
+    $email_error = "Can't submit empty email.";
+    
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $email_filterError = "Invalid email format";
+    unset($_SESSION["email"]);
+} else {
+    $_SESSION["email"] = $email;
 }
 
-else {
+if (empty($street)) {
+    $street_error = "Can't submit empty email.";
+    
+} else {
     $_SESSION["street"] = $street;
 }
-if(empty($streetNumber)){
-    $streetNumber_error = "Please insert a valid street number";
-}
 
-elseif(!is_numeric($streetNumber)) {
+if (empty($streetNumber)) {
+    $streetNumber_error = "Can't submit empty adress.";
+    
+} elseif (!is_numeric($streetNumber)) {
     $streetnumeric_error = 'Data entered was not numeric';
-}
-
-else {
+    unset($_SESSION["streetnumber"]);
+} else {
     $_SESSION["streetnumber"] = $streetNumber;
 }
-if(empty($city)) {
-    $city_error = "Please insert a valid city name";
-}
-else {
+
+if (empty($city)) {
+    $city_error = "Can't submit empty city.";
+    
+} else {
     $_SESSION["city"] = $city;
 }
-if(empty($zipcode)){
-    $zipcode_error = "Please insert a valid zipcode";
-    unset ($_SESSION["zipcode"]);
-}
 
-elseif(!is_numeric($zipcode)) {
-$zipcodenum_error = "Data is not numeric";
-unset ($_SESSION["zipcode"]);
-}
-
-else {
+if (empty($zipcode)) {
+    $zipcode_error = "Can't submit empty zipcode.";
+   
+} elseif (!is_numeric($zipcode)) {
+    $zipcodenum_error = "Data is not numeric";
+    unset($_SESSION["zipcode"]);
+} else {
     $_SESSION["zipcode"] = $zipcode;
 }
-function whatIsHappening() {
+
+
+function whatIsHappening()
+{
     echo '<h2>$_GET</h2>';
     var_dump($_GET);
     echo '<h2>$_POST</h2>';
@@ -96,4 +98,3 @@ $products = [
 $totalValue = 0;
 
 require 'form-view.php';
-

@@ -29,16 +29,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">E-mail:</label>
-                    <input value="
-                    <?php if (isset($_SESSION["email"])) { ?>
-                         <?php echo $_SESSION["email"] ?> 
-                    <?php } ?>" type="text" id="email" name="email" class="form-control" />
+                    <input type="text" id="email" name="email" class="form-control" placeholder="example@gmail.com" />
+                    
                     <?php if (isset($email_error)) { ?>
                         <?php echo $email_error ?>
                     <?php } ?>
                     <?php if (isset($email_filterError)) { ?>
                         <?php echo $email_filterError ?>
                     <?php } ?>
+                    <?php if (isset($_SESSION["email"])) { ?>
+                        <?php echo $_SESSION["email"] ?>
+                        <?php } ?>
 
 
                 </div>
@@ -51,21 +52,28 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="street">Street:</label>
-                        <input type="text" name="street" id="street" class="form-control" value=<?php if (isset($street_error)) { ?> <?php echo $street_error ?> <?php } ?>>
+                        <input type="text" name="street" id="street" class="form-control" placeholder="Wijnstraat">
+                        <?php if (isset($street_error)) { ?>
+                            <?php echo $street_error ?>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["street"])) { ?>
+                            <?php echo $_SESSION["street"] ?>
+                        <?php } ?>
+                        
 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="streetnumber">Street number:</label>
-                        <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="
+                        <input type="text" id="streetnumber" name="streetnumber" class="form-control" placeholder="69">
                         <?php if (isset($streetNumber_error)) { ?>
-                             <?php echo $streetNumber_error ?> 
+                            <?php echo $streetNumber_error ?>
                         <?php } ?>
                         <?php if (isset($streetnumeric_error)) { ?>
-                        <?php echo $streetnumeric_error ?>
+                            <?php echo $streetnumeric_error ?>
                         <?php } ?>
                         <?php if (isset($streetNumber)) { ?>
-                        <?php echo $_SESSION["streetnumber"] ?>
-                        <?php } ?>">
+                            <?php echo $_SESSION["streetnumber"] ?>
+                        <?php } ?>
 
 
 
@@ -74,24 +82,27 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="city">City:</label>
-                        <input type="text" id="city" name="city" class="form-control">
+                        <input type="text" id="city" name="city" class="form-control" placeholder="Antwerp">
                         <?php if (isset($city_error)) { ?>
-                            <p> <?php echo $city_error ?> </p>
+                            <?php echo $city_error ?>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["city"])) { ?>
+                            <?php echo $_SESSION["city"] ?>
                         <?php } ?>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="zipcode">Zipcode</label>
-                        <input type="text" id="zipcode" name="zipcode" class="form-control" value="
-                       
-                        <?php if (isset($_SESSION["zipcode"])) { ?>
-                        <?php echo $_SESSION["zipcode"] ?>
-                    
-                        <?php } ?>">
+                        <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="2000">
+
                         <?php if (isset($zipcode_error)) { ?>
                             <?php echo $zipcode_error ?>
                         <?php } ?>
                         <?php if (isset($zipcodenum_error)) { ?>
                             <?php echo $zipcodenum_error ?>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["zipcode"])) { ?>
+                            <?php echo $_SESSION["zipcode"] ?>
+
                         <?php } ?>
 
 

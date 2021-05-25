@@ -29,16 +29,17 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">E-mail:</label>
-                    <input value= "<?php if (isset($email_error)) { ?>
-                        <p> <?php echo $email_error ?> </p>
+                    <input value="
+                    <?php if (isset($_SESSION["email"])) { ?>
+                         <?php echo $_SESSION["email"] ?> 
+                    <?php } ?>" type="text" id="email" name="email" class="form-control" />
+                    <?php if (isset($email_error)) { ?>
+                        <?php echo $email_error ?>
                     <?php } ?>
                     <?php if (isset($email_filterError)) { ?>
-                        <p> <?php echo $email_filterError ?> </p>
+                        <?php echo $email_filterError ?>
                     <?php } ?>
-                    <?php if (isset($_SESSION["email"])) { ?>
-                        <p> <?php echo $_SESSION["email"] ?> </p>
-                    <?php } ?>" type="text" id="email" name="email" class="form-control" />
-                   
+
 
                 </div>
                 <div></div>
@@ -50,18 +51,23 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="street">Street:</label>
-                        <input type="text" name="street" id="street" class="form-control">
-                        <?php if (isset($street_error)) { ?>
-                            <p> <?php echo $street_error ?> </p>
-                        <?php } ?>
+                        <input type="text" name="street" id="street" class="form-control" value=<?php if (isset($street_error)) { ?> <?php echo $street_error ?> <?php } ?>>
 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="streetnumber">Street number:</label>
-                        <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                        <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="
                         <?php if (isset($streetNumber_error)) { ?>
-                            <p> <?php echo $streetNumber_error ?> </p>
+                             <?php echo $streetNumber_error ?> 
                         <?php } ?>
+                        <?php if (isset($streetnumeric_error)) { ?>
+                        <?php echo $streetnumeric_error ?>
+                        <?php } ?>
+                        <?php if (isset($streetNumber)) { ?>
+                        <?php echo $_SESSION["streetnumber"] ?>
+                        <?php } ?>">
+
+
 
                     </div>
                 </div>
@@ -75,10 +81,19 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="zipcode">Zipcode</label>
-                        <input type="text" id="zipcode" name="zipcode" class="form-control">
+                        <input type="text" id="zipcode" name="zipcode" class="form-control" value="
+                       
+                        <?php if (isset($_SESSION["zipcode"])) { ?>
+                        <?php echo $_SESSION["zipcode"] ?>
+                    
+                        <?php } ?>">
                         <?php if (isset($zipcode_error)) { ?>
-                            <p> <?php echo $zipcode_error ?> </p>
+                            <?php echo $zipcode_error ?>
                         <?php } ?>
+                        <?php if (isset($zipcodenum_error)) { ?>
+                            <?php echo $zipcodenum_error ?>
+                        <?php } ?>
+
 
                     </div>
                 </div>
@@ -109,7 +124,7 @@
             text-align: center;
         }
     </style>
-    <?php whatIsHappening()?>
+    <?php whatIsHappening() ?>
 </body>
 
 </html>

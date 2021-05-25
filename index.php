@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 
 //we are going to use session variables so we need to enable sessions
 session_start();
-
+//veel beter array met post inputs, dan forEach lopen (input array)
 $email = $_POST['email'];
 $street = $_POST['street'];
 $streetNumber = $_POST['streetnumber'];
@@ -23,19 +23,44 @@ elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
  $email_filterError = "Invalid email format";
 }
 else {
-    $_SESSION["email"] = $email;
+    $_SESSION["email"] = $email;      
 }
 if(empty($street)) {
     $street_error = "Please insert a valid street adress";
 }
+
+else {
+    $_SESSION["street"] = $street;
+}
 if(empty($streetNumber)){
     $streetNumber_error = "Please insert a valid street number";
+}
+
+elseif(!is_numeric($streetNumber)) {
+    $streetnumeric_error = 'Data entered was not numeric';
+}
+
+else {
+    $_SESSION["streetnumber"] = $streetNumber;
 }
 if(empty($city)) {
     $city_error = "Please insert a valid city name";
 }
+else {
+    $_SESSION["city"] = $city;
+}
 if(empty($zipcode)){
     $zipcode_error = "Please insert a valid zipcode";
+    unset ($_SESSION["zipcode"]);
+}
+
+elseif(!is_numeric($zipcode)) {
+$zipcodenum_error = "Data is not numeric";
+unset ($_SESSION["zipcode"]);
+}
+
+else {
+    $_SESSION["zipcode"] = $zipcode;
 }
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';

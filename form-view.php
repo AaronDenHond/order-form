@@ -29,17 +29,18 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">E-mail:</label>
-                    <input type="text" id="email" name="email" class="form-control" placeholder="example@gmail.com" />
-                    
+                    <input type="text" id="email" name="email" class="form-control" placeholder="example@gmail.com" value="<?php if(isset($_SESSION["email"])) echo $_SESSION["email"]?>"/>
+                    <!-- GEEN SPATIES IN VALUES! in PHP kunen we in 1 line if conditie schrijven zoals in lijn 33 -->
+                    <!-- if 1 lijn geen brackets nodig heel handig in php -->
                     <?php if (isset($email_error)) { ?>
                         <?php echo $email_error ?>
                     <?php } ?>
                     <?php if (isset($email_filterError)) { ?>
                         <?php echo $email_filterError ?>
                     <?php } ?>
-                    <?php if (isset($_SESSION["email"])) { ?>
-                        <?php echo $_SESSION["email"] ?>
-                        <?php } ?>
+
+                   
+                        
 
 
                 </div>
@@ -52,29 +53,23 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="street">Street:</label>
-                        <input type="text" name="street" id="street" class="form-control" placeholder="Wijnstraat">
+                        <input type="text" name="street" id="street" class="form-control" placeholder="Wijnstraat" value = "<?php if(isset($_SESSION["street"])) echo $_SESSION["street"]?>"/>
                         <?php if (isset($street_error)) { ?>
                             <?php echo $street_error ?>
                         <?php } ?>
-                        <?php if (isset($_SESSION["street"])) { ?>
-                            <?php echo $_SESSION["street"] ?>
-                        <?php } ?>
-                        
+                       
 
                     </div>
                     <div class="form-group col-md-6">
                         <label for="streetnumber">Street number:</label>
-                        <input type="text" id="streetnumber" name="streetnumber" class="form-control" placeholder="69">
+                        <input type="text" id="streetnumber" name="streetnumber" class="form-control" placeholder="69" value = "<?php if(isset($_SESSION["streetnumber"])) echo $_SESSION["streetnumber"]?>"/>
                         <?php if (isset($streetNumber_error)) { ?>
                             <?php echo $streetNumber_error ?>
                         <?php } ?>
                         <?php if (isset($streetnumeric_error)) { ?>
                             <?php echo $streetnumeric_error ?>
                         <?php } ?>
-                        <?php if (isset($streetNumber)) { ?>
-                            <?php echo $_SESSION["streetnumber"] ?>
-                        <?php } ?>
-
+                   
 
 
                     </div>
@@ -82,17 +77,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="city">City:</label>
-                        <input type="text" id="city" name="city" class="form-control" placeholder="Antwerp">
+                        <input type="text" id="city" name="city" class="form-control" placeholder="Antwerp" value = "<?php if(isset($_SESSION["city"])) echo $_SESSION["city"]?>"/>
                         <?php if (isset($city_error)) { ?>
                             <?php echo $city_error ?>
                         <?php } ?>
-                        <?php if (isset($_SESSION["city"])) { ?>
-                            <?php echo $_SESSION["city"] ?>
-                        <?php } ?>
+                       
                     </div>
+
                     <div class="form-group col-md-6">
                         <label for="zipcode">Zipcode</label>
-                        <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="2000">
+                        <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="2000" value = "<?php if(isset($_SESSION["zipcode"])) echo $_SESSION["zipcode"]?>"/>
 
                         <?php if (isset($zipcode_error)) { ?>
                             <?php echo $zipcode_error ?>
@@ -100,10 +94,7 @@
                         <?php if (isset($zipcodenum_error)) { ?>
                             <?php echo $zipcodenum_error ?>
                         <?php } ?>
-                        <?php if (isset($_SESSION["zipcode"])) { ?>
-                            <?php echo $_SESSION["zipcode"] ?>
-
-                        <?php } ?>
+                       
 
 
                     </div>

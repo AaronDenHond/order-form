@@ -16,10 +16,11 @@ $street = $_POST['street'];
 $streetNumber = $_POST['streetnumber'];
 $city = $_POST['city'];
 $zipcode = $_POST['zipcode'];
-
+//isset checken zodat op page load geen errors 
 
 if (empty($email)) {
     $email_error = "Can't submit empty email.";
+    unset($_SESSION["email"]);
     
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $email_filterError = "Invalid email format";

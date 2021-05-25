@@ -11,11 +11,18 @@ error_reporting(E_ALL);
 session_start();
 //veel beter array met post inputs, dan forEach lopen (input array)
 
+if(isset($_POST['email'])){
+
 $email = $_POST['email'];
 $street = $_POST['street'];
 $streetNumber = $_POST['streetnumber'];
 $city = $_POST['city'];
 $zipcode = $_POST['zipcode'];
+}
+else {
+    $email = $street = $streetNumber = $city = $zipcode ="";
+}
+
 //isset checken zodat op page load geen errors 
 
 if (empty($email)) {

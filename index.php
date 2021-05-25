@@ -10,6 +10,32 @@ error_reporting(E_ALL);
 //we are going to use session variables so we need to enable sessions
 session_start();
 //veel beter array met post inputs, dan forEach lopen (input array)
+$products = [
+    ['name' => 'Club Ham', 'price' => 3.20],
+    ['name' => 'Club Cheese', 'price' => 3],
+    ['name' => 'Club Cheese & Ham', 'price' => 4],
+    ['name' => 'Club Chicken', 'price' => 4],
+    ['name' => 'Club Salmon', 'price' => 5]
+];
+
+
+
+if ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=1') {
+    $products = [
+        ['name' => 'Club Ham', 'price' => 3.20],
+        ['name' => 'Club Cheese', 'price' => 3],
+        ['name' => 'Club Cheese & Ham', 'price' => 4],
+        ['name' => 'Club Chicken', 'price' => 4],
+        ['name' => 'Club Salmon', 'price' => 5]
+    ];
+} elseif ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=0') {
+    $products = [
+        ['name' => 'Cola', 'price' => 2],
+        ['name' => 'Fanta', 'price' => 2],
+        ['name' => 'Sprite', 'price' => 2],
+        ['name' => 'Ice-tea', 'price' => 3],
+    ];
+}
 
 if (isset($_POST['email'])) {
 
@@ -69,7 +95,16 @@ if (empty($zipcode)) {
 function overView()
 {
     foreach ($_POST as $key => $value) {
-        echo  $key . " is " . $value . "<br>";
+        if (is_array($value)) {
+            foreach ($value as $key2 => $value2) {
+                //check with vardump! here the key and the value were switched really weird
+                echo $GLOBALS["products"][$key2]['name'] . "<br>";
+                //hier global van maken door scope sad
+            }
+        } else {
+
+            echo  $key . " is " . $value . "<br>";
+        }
     }
 }
 
@@ -92,43 +127,18 @@ function whatIsHappening()
 
 
 //your products with their price.
-$products = [
-    ['name' => 'Club Ham', 'price' => 3.20],
-    ['name' => 'Club Cheese', 'price' => 3],
-    ['name' => 'Club Cheese & Ham', 'price' => 4],
-    ['name' => 'Club Chicken', 'price' => 4],
-    ['name' => 'Club Salmon', 'price' => 5]
-];
 
-$totalPriceFood = array_sum($products);
-
-if ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=1') {
-    $products = [
-        ['name' => 'Club Ham', 'price' => 3.20],
-        ['name' => 'Club Cheese', 'price' => 3],
-        ['name' => 'Club Cheese & Ham', 'price' => 4],
-        ['name' => 'Club Chicken', 'price' => 4],
-        ['name' => 'Club Salmon', 'price' => 5]
-    ];
-} elseif ($_SERVER['REQUEST_URI'] == '/order-form/index.php?food=0') {
-    $products = [
-        ['name' => 'Cola', 'price' => 2],
-        ['name' => 'Fanta', 'price' => 2],
-        ['name' => 'Sprite', 'price' => 2],
-        ['name' => 'Ice-tea', 'price' => 3],
-    ];
-}
 
 
 $totalValue = 0;
 
-if(isset($_POST['express_delivery'])) {
+if (isset($_POST['express_delivery'])) {
     $totalValue += 5;
     $deliveryTime = "45 minutes until delivery.";
-}
-
-else {
+} else {
     $deliveryTime = "2 hours until delivery.";
 }
+
+
 
 require 'form-view.php';
